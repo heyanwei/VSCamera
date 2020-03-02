@@ -66,9 +66,21 @@ int main(int argc, char const* argv[])
             }
             break;
         case (int)console::MainConsoleCode::Camera:
+
             break;
-        case (int)console::MainConsoleCode::Face:
+        case (int)console::MainConsoleCode::FaceDetection:
             came.Train();
+            break;
+        case (int)console::MainConsoleCode::FacePredict:     
+            if (came.Open() && came.LoadXml())
+            {
+                while (1)
+                {
+                    came.Predict();
+                    cv::waitKey(20);
+                }
+                
+            }           
             break;
         default:
             break;

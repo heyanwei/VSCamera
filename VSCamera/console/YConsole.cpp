@@ -25,6 +25,7 @@ namespace console
         std::cout << "1. 图像处理示例" << std::endl;
         std::cout << "2. 摄像头示例" << std::endl;
         std::cout << "3. 人脸检测示例" << std::endl;
+        std::cout << "4. 人脸预测示例" << std::endl;
         std::cout << "b. 退出" << std::endl;
         std::cout << std::endl << std::endl << "请输入需要执行的操作编号：" << std::endl;
 
