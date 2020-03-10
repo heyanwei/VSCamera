@@ -9,8 +9,8 @@ namespace console
 	{
 		Image = 1,
 		Camera,
-		FaceDetection,
-		FacePredict
+		Vedio,
+		Train,
 	};
 
 	class YConsole

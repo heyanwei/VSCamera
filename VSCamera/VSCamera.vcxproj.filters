@@ -21,13 +21,16 @@
     <ClCompile Include="utils\log\easylogging++.cc">
       <Filter>源文件</Filter>
     </ClCompile>
-    <ClCompile Include="camera\HCamera.cpp">
-      <Filter>源文件</Filter>
-    </ClCompile>
     <ClCompile Include="console\YConsole.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
-    <ClCompile Include="image\HImage.cpp">
+    <ClCompile Include="devices\camera\HCamera.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="devices\vedio\YVedio.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="person\face\YFace.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
   </ItemGroup>
@@ -35,13 +38,16 @@
     <ClInclude Include="utils\log\easylogging++.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="camera\HCamera.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
     <ClInclude Include="console\YConsole.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="image\HImage.h">
+    <ClInclude Include="devices\camera\HCamera.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="devices\vedio\YVedio.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="person\face\YFace.h">
       <Filter>头文件</Filter>
     </ClInclude>
   </ItemGroup>

@@ -3,8 +3,9 @@
 
 #include "utils/log/easylogging++.h"
 #include "console/YConsole.h"
-#include "image/HImage.h"
-#include "camera/HCamera.h"
+#include "devices/camera/HCamera.h"
+#include "devices/vedio/YVedio.h"
+#include "person/face/YFace.h"
 
 INITIALIZE_EASYLOGGINGPP
 
@@ -39,6 +40,18 @@ int main(int argc, char const* argv[])
 
     console::YConsole& cons = console::YConsole::Instance();
     std::string str = "";
+
+    camera::HCamera came;
+    vedio::YVedio ved;
+    cv::Mat imat;
+
+    person::face::YFace pFace;
+    if (!pFace.Init())
+    {
+        LOG(ERROR) << "pFace初始化失败...";
+        return 0;
+    }
+
     while (1)
     {
         if (!cons.IfContinue())
@@ -52,35 +65,55 @@ int main(int argc, char const* argv[])
         {
             break;
         }
-        int code = atoi(str.c_str());
-        image::HImage img;
-        camera::HCamera came;
+
+        int code = atoi(str.c_str());      
+
         switch (code)
         {
         case (int)console::MainConsoleCode::Image:
-            if (img.LoadMat("smile", "D:\\img\\1.jpg"))
+            imat = cv::imread("D:\\img\\1.jpg");
+            if (!imat.empty())
             {
-                img.Show();
-                img.MResize(0.2, 0.2);
-                img.Show();
+                std::vector<cv::Mat> faces;
+                pFace.HasFace(imat, imat, faces);
+                cv::imshow("camera", imat);
+                cv::waitKey();
             }
             break;
         case (int)console::MainConsoleCode::Camera:
-
-            break;
-        case (int)console::MainConsoleCode::FaceDetection:
-            came.Train();
-            break;
-        case (int)console::MainConsoleCode::FacePredict:     
-            if (came.Open() && came.LoadXml())
+            if (came.Open())
             {
                 while (1)
                 {
-                    came.Predict();
+                    cv::Mat p;
+                    if (came.Show(p) && (!p.empty()))
+                    {
+                        std::vector<cv::Mat> faces;
+                        pFace.HasFace(p, p, faces);
+                        cv::imshow("camera", p);
+                    }
+                    cv::waitKey(20);                  
+                }
+            }
+            break;
+        case (int)console::MainConsoleCode::Vedio:
+            if (ved.Open(""))
+            {
+                while (1)
+                {
+                    cv::Mat p;
+                    if (ved.Show(p) && (!p.empty()))
+                    {
+                        std::vector<cv::Mat> faces;
+                        pFace.HasFace(p, p, faces);
+                        cv::imshow("camera", p);
+                    }
                     cv::waitKey(20);
                 }
-                
-            }           
+            }
+            break;
+        case (int)console::MainConsoleCode::Train:     
+            pFace.Train();
             break;
         default:
             break;

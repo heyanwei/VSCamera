@@ -15,16 +15,11 @@ namespace camera
         HCamera();
         ~HCamera();
 
-        bool LoadXml();
         bool Open();
-        bool Show();
-        bool SaveFace(std::string name);
-        bool Train();
-        bool Predict();
+        bool Show(cv::Mat &frame);
 
     private:
-        cv::VideoCapture _capture;
-        cv::CascadeClassifier _faceCascaClassifier;
+        cv::VideoCapture _capture;       
     };
 
 } // namespace camera

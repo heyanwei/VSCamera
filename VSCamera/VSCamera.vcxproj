@@ -154,17 +154,19 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="camera\HCamera.cpp" />
-    <ClCompile Include="image\HImage.cpp" />
+    <ClCompile Include="devices\camera\HCamera.cpp" />
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="utils\log\easylogging++.cc" />
     <ClCompile Include="console\YConsole.cpp" />
+    <ClCompile Include="devices\vedio\YVedio.cpp" />
+    <ClCompile Include="person\face\YFace.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="camera\HCamera.h" />
-    <ClInclude Include="image\HImage.h" />
+    <ClInclude Include="devices\camera\HCamera.h" />
     <ClInclude Include="utils\log\easylogging++.h" />
     <ClInclude Include="console\YConsole.h" />
+    <ClInclude Include="devices\vedio\YVedio.h" />
+    <ClInclude Include="person\face\YFace.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

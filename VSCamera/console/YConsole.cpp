@@ -22,10 +22,10 @@ namespace console
 	{
         system("cls");
         std::cout << "================== 图像处理程序 ==================" << std::endl << std::endl;
-        std::cout << "1. 图像处理示例" << std::endl;
-        std::cout << "2. 摄像头示例" << std::endl;
-        std::cout << "3. 人脸检测示例" << std::endl;
-        std::cout << "4. 人脸预测示例" << std::endl;
+        std::cout << (int)MainConsoleCode::Image <<". 图像处理示例" << std::endl;
+        std::cout << (int)MainConsoleCode::Camera << ". 摄像头示例" << std::endl;
+        std::cout << (int)MainConsoleCode::Vedio << ". 播放示例" << std::endl;
+        std::cout << (int)MainConsoleCode::Train << ". 训练示例" << std::endl;
         std::cout << "b. 退出" << std::endl;
         std::cout << std::endl << std::endl << "请输入需要执行的操作编号：" << std::endl;
 
