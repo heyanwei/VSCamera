@@ -18,7 +18,6 @@ namespace camera
         bool Open();
         bool Show(cv::Mat &frame);
 
-    private:
         cv::VideoCapture _capture;       
     };
 

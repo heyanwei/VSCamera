@@ -9,6 +9,7 @@ namespace console
 	{
 		Image = 1,
 		Camera,
+		DahuaCamera,
 		Vedio,
 		Train,
 	};
@@ -18,6 +19,8 @@ namespace console
 	public:
 		static YConsole& Instance();
 		std::string Show();
+
+		std::string Ask(std::string str);
 		bool IfContinue();
 
 	private:

@@ -24,6 +24,7 @@ namespace console
         std::cout << "================== 图像处理程序 ==================" << std::endl << std::endl;
         std::cout << (int)MainConsoleCode::Image <<". 图像处理示例" << std::endl;
         std::cout << (int)MainConsoleCode::Camera << ". 摄像头示例" << std::endl;
+        std::cout << (int)MainConsoleCode::DahuaCamera << ". 大华监控示例" << std::endl;
         std::cout << (int)MainConsoleCode::Vedio << ". 播放示例" << std::endl;
         std::cout << (int)MainConsoleCode::Train << ". 训练示例" << std::endl;
         std::cout << "b. 退出" << std::endl;
@@ -33,6 +34,14 @@ namespace console
         std::cin >> return_str;
         return return_str;
 	}
+
+    std::string YConsole::Ask(std::string str)
+    {
+        std::cout << std::endl  << str << std::endl;
+        std::string return_str = "";
+        std::cin >> return_str;
+        return return_str;
+    }
 
     bool YConsole::IfContinue()
     {

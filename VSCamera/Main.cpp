@@ -4,8 +4,10 @@
 #include "utils/log/easylogging++.h"
 #include "console/YConsole.h"
 #include "devices/camera/HCamera.h"
+#include "devices/camera/DahuaCamera.h"
 #include "devices/vedio/YVedio.h"
 #include "person/face/YFace.h"
+#include "utils/ffmpeg/Yffmpeg.h"
 
 INITIALIZE_EASYLOGGINGPP
 
@@ -42,8 +44,10 @@ int main(int argc, char const* argv[])
     std::string str = "";
 
     camera::HCamera came;
+    camera::DahuaCamera dahua;
     vedio::YVedio ved;
     cv::Mat imat;
+    Yffmpeg fmpg;
 
     person::face::YFace pFace;
     if (!pFace.Init())
@@ -96,13 +100,13 @@ int main(int argc, char const* argv[])
                 }
             }
             break;
-        case (int)console::MainConsoleCode::Vedio:
-            if (ved.Open(""))
+        case (int)console::MainConsoleCode::DahuaCamera:
+            if (dahua.Open("192.168.1.55", "admin", "yeefung123"))
             {
                 while (1)
                 {
                     cv::Mat p;
-                    if (ved.Show(p) && (!p.empty()))
+                    if (dahua.Show(p) && (!p.empty()))
                     {
                         std::vector<cv::Mat> faces;
                         pFace.HasFace(p, p, faces);
@@ -110,6 +114,12 @@ int main(int argc, char const* argv[])
                     }
                     cv::waitKey(20);
                 }
+            }
+            break;
+        case (int)console::MainConsoleCode::Vedio:          
+            if (fmpg.Init("F:\\1.mkv"))
+            {
+                
             }
             break;
         case (int)console::MainConsoleCode::Train:     
