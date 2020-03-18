@@ -4,7 +4,7 @@
 
 namespace person
 {
-	class YFace : public YPerson
+	class YBody : public YPerson
 	{
 	public:
 		// 通过 YPerson 继承
@@ -12,8 +12,7 @@ namespace person
 
 		// 通过 YPerson 继承
 		virtual bool Train() override;
-
 	};
-
 }
+
 

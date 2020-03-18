@@ -39,6 +39,12 @@
     <ClCompile Include="utils\ffmpeg\Yffmpeg.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
+    <ClCompile Include="person\body\YBody.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="person\interface\YPerson.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="utils\log\easylogging++.h">
@@ -408,6 +414,12 @@
       <Filter>头文件</Filter>
     </ClInclude>
     <ClInclude Include="utils\ffmpeg\include\libswscale\version.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="person\body\YBody.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="person\interface\YPerson.h">
       <Filter>头文件</Filter>
     </ClInclude>
   </ItemGroup>

@@ -162,6 +162,8 @@
     <ClCompile Include="devices\vedio\YVedio.cpp" />
     <ClCompile Include="person\face\YFace.cpp" />
     <ClCompile Include="utils\ffmpeg\Yffmpeg.cpp" />
+    <ClCompile Include="person\body\YBody.cpp" />
+    <ClCompile Include="person\interface\YPerson.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="devices\camera\DahuaCamera.h" />
@@ -287,6 +289,8 @@
     <ClInclude Include="devices\vedio\YVedio.h" />
     <ClInclude Include="person\face\YFace.h" />
     <ClInclude Include="utils\ffmpeg\Yffmpeg.h" />
+    <ClInclude Include="person\body\YBody.h" />
+    <ClInclude Include="person\interface\YPerson.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="utils\ffmpeg\lib\avcodec-58.def" />

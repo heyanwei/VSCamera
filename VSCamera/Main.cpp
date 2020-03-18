@@ -7,6 +7,7 @@
 #include "devices/camera/DahuaCamera.h"
 #include "devices/vedio/YVedio.h"
 #include "person/face/YFace.h"
+#include "person/body/YBody.h"
 #include "utils/ffmpeg/Yffmpeg.h"
 
 INITIALIZE_EASYLOGGINGPP
@@ -49,10 +50,16 @@ int main(int argc, char const* argv[])
     cv::Mat imat;
     Yffmpeg fmpg;
 
-    person::face::YFace pFace;
+    person::YFace pFace;
+    person::YBody pBody;
     if (!pFace.Init())
     {
         LOG(ERROR) << "pFace初始化失败...";
+        return 0;
+    }
+    if (!pBody.Init())
+    {
+        LOG(ERROR) << "pBody初始化失败...";
         return 0;
     }
 
@@ -79,7 +86,10 @@ int main(int argc, char const* argv[])
             if (!imat.empty())
             {
                 std::vector<cv::Mat> faces;
-                pFace.HasFace(imat, imat, faces);
+                pFace.HasObject(imat, imat, faces);
+                cv::imshow("camera", imat);
+                cv::waitKey();
+                pBody.HasObject(imat, imat, faces);
                 cv::imshow("camera", imat);
                 cv::waitKey();
             }
@@ -93,7 +103,7 @@ int main(int argc, char const* argv[])
                     if (came.Show(p) && (!p.empty()))
                     {
                         std::vector<cv::Mat> faces;
-                        pFace.HasFace(p, p, faces);
+                        pFace.HasObject(p, p, faces);
                         cv::imshow("camera", p);
                     }
                     cv::waitKey(20);                  
@@ -109,7 +119,7 @@ int main(int argc, char const* argv[])
                     if (dahua.Show(p) && (!p.empty()))
                     {
                         std::vector<cv::Mat> faces;
-                        pFace.HasFace(p, p, faces);
+                        pFace.HasObject(p, p, faces);
                         cv::imshow("camera", p);
                     }
                     cv::waitKey(20);
