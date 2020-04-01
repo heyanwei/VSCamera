@@ -6,6 +6,14 @@ namespace person
 {
 	bool YFace::Init()
 	{
+        std::string cnnpath = "D:\\img\\dataset\\cnn\\";
+        if (!LoadNetwork(cnnpath + "age_deploy.prototxt", cnnpath + "age_net.caffemodel",
+            cnnpath + "gender_deploy.prototxt", cnnpath + "gender_net.caffemodel",
+            cnnpath + "opencv_face_detector.pbtxt", cnnpath + "opencv_face_detector_uint8.pb"))
+        {
+            LOG(ERROR) << "LoadNetwork failed...";
+            return false;
+        }
 		return LoadModel("D:\\img\\dataset\\haarcascades\\haarcascade_frontalface_alt.xml");
 	}
 

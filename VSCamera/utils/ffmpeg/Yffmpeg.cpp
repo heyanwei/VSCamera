@@ -11,27 +11,89 @@ Yffmpeg::~Yffmpeg()
 
 bool Yffmpeg::Init(std::string file)
 {
-	//注册所有的formats和codecs
-	//av_register_all();
-
-	//打开视频文件
-	if (avformat_open_input(&_formatCtx, file.c_str(), NULL, NULL)<0)
+	AVPacket* pkt = av_packet_alloc();
+	if (!pkt)
 	{
-		LOG(ERROR) << "无法打开输入";
+		LOG(ERROR) << "无法分配av包";
 		return false;
 	}
 
-	if (avformat_find_stream_info(_formatCtx, NULL) < 0)
+	// 查找解码器
+	AVCodec *codec = avcodec_find_decoder(AV_CODEC_ID_MPEG1VIDEO);
+	if (!codec) 
 	{
-		LOG(ERROR) << "无法找到流信息";
+		LOG(ERROR) << "找不到解码器";
 		return false;
 	}
 
-	// 打印输入输出格式的详细信息
-	av_dump_format(_formatCtx, 0, file.c_str(), 0);
+	// 格式化解码器
+	AVCodecParserContext* parser = av_parser_init(codec->id);
+	if (!parser)
+	{
+		LOG(ERROR) << "格式化解码器失败";
+		return false;
+	}
 
+	AVCodecContext *c = avcodec_alloc_context3(codec);
+	if (!c)
+	{
+		LOG(ERROR) << "分配索引失败";
+		return false;
+	}
 
-	
+	if (avcodec_open2(c, codec, NULL) < 0)
+	{
+		LOG(ERROR) << "解码器打开失败";
+		return false;
+	}
+
+	FILE* f;
+	errno_t err= fopen_s(&f, file.c_str(),"rb");
+	if (err != 0)
+	{
+		LOG(ERROR) << "文件打开失败";
+		return false;
+	}
+
+	AVFrame* frame = av_frame_alloc();
+	if (!frame) 
+	{
+		LOG(ERROR) << "分配帧失败";
+		return false;
+	}
+
+	uint8_t inbuf[INBUF_SIZE + AV_INPUT_BUFFER_PADDING_SIZE];
+	uint8_t* data;
+	size_t data_size;	
+	int ret;	
+
+	while (!feof(f))
+	{
+		data_size = fread(inbuf, 1, INBUF_SIZE, f);
+		if (!data_size)
+		{
+			break;
+		}
+		data = inbuf;
+		while (data_size > 0)
+		{
+			ret = av_parser_parse2(parser, c, &pkt->data, &pkt->size,
+				data, data_size, AV_NOPTS_VALUE, AV_NOPTS_VALUE, 0);
+			if (ret < 0)
+			{
+				LOG(ERROR) << "转换失败";
+				return false;
+			}
+			data += ret;
+			data_size -= ret;
+
+			if (pkt->size)
+			{
+				decode(c, frame, pkt, "a.avi");
+			}
+		}
+		decode(c, frame, NULL, "a.avi");
+	}
 	
 	return true;
 }

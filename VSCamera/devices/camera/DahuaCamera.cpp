@@ -7,7 +7,7 @@ namespace camera
 	bool DahuaCamera::Open(std::string ip, std::string user, std::string password)
 	{
 		//http://user:pass@cam_address:8081/cgi/mjpg/mjpg.cgi?.mjpg
-		std::string url = "rtsp://" + user + ":" + password + "@" + ip + "/cam/realmonitor?channel=1&subtype=0";
+		std::string url = "rtsp://" + user + ":" + password + "@" + ip + "/cam/realmonitor?channel=1&subtype=1";
 		LOG(INFO) << "Open url: " << url;
 		if (!_capture.open(url))
 		{

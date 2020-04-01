@@ -8,7 +8,6 @@
 #include "devices/vedio/YVedio.h"
 #include "person/face/YFace.h"
 #include "person/body/YBody.h"
-#include "utils/ffmpeg/Yffmpeg.h"
 
 INITIALIZE_EASYLOGGINGPP
 
@@ -48,7 +47,6 @@ int main(int argc, char const* argv[])
     camera::DahuaCamera dahua;
     vedio::YVedio ved;
     cv::Mat imat;
-    Yffmpeg fmpg;
 
     person::YFace pFace;
     person::YBody pBody;
@@ -85,13 +83,17 @@ int main(int argc, char const* argv[])
             imat = cv::imread("D:\\img\\1.jpg");
             if (!imat.empty())
             {
-                std::vector<cv::Mat> faces;
+                pFace.HasObjectExtra(imat, imat);
+                cv::imshow("camera", imat);
+                cv::waitKey();
+
+                /*std::vector<cv::Mat> faces;
                 pFace.HasObject(imat, imat, faces);
                 cv::imshow("camera", imat);
                 cv::waitKey();
                 pBody.HasObject(imat, imat, faces);
                 cv::imshow("camera", imat);
-                cv::waitKey();
+                cv::waitKey();*/
             }
             break;
         case (int)console::MainConsoleCode::Camera:
@@ -111,7 +113,7 @@ int main(int argc, char const* argv[])
             }
             break;
         case (int)console::MainConsoleCode::DahuaCamera:
-            if (dahua.Open("192.168.1.55", "admin", "yeefung123"))
+            if (dahua.Open("192.168.1.55:554", "admin", "yeefung123"))
             {
                 while (1)
                 {
@@ -127,10 +129,7 @@ int main(int argc, char const* argv[])
             }
             break;
         case (int)console::MainConsoleCode::Vedio:          
-            if (fmpg.Init("F:\\1.mkv"))
-            {
-                
-            }
+            
             break;
         case (int)console::MainConsoleCode::Train:     
             pFace.Train();
