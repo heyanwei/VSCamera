@@ -72,8 +72,8 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <LinkIncremental>true</LinkIncremental>
-    <IncludePath>$(ProjectDir);D:\Software\opencv\build\install\include;$(ProjectDir)utils\ffmpeg\include;$(IncludePath)</IncludePath>
-    <LibraryPath>D:\Software\opencv\build\install\x86\vc15\lib;$(ProjectDir)utils\ffmpeg\lib;$(LibraryPath)</LibraryPath>
+    <IncludePath>$(ProjectDir);D:\net\opencv\opencv\build\install\include;$(ProjectDir)utils\ffmpeg\include;$(IncludePath)</IncludePath>
+    <LibraryPath>D:\net\opencv\opencv\build\install\x86\vc15\lib;$(ProjectDir)utils\ffmpeg\lib;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <LinkIncremental>true</LinkIncremental>
